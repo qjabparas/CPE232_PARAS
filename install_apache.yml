@@ -1,16 +1,13 @@
 ---
-- hosts: all
+- hosts: 192.168.10.5
   become: true
   tasks:
 
-  - name: update repository index
-    apt:
+  - name: install apache and php packages for RedHat
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
       update_cache: yes
 
-  - name: install apache2 package
-    apt:
-      name: apache2
-
-  - name: add PHP support for apache
-    apt:
-      name: libapache2-mod-php
